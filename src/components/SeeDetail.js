@@ -4,6 +4,16 @@ import '../App.css';
 
 class SeeDetail extends Component{
     state = { modal: false };
+
+    prev_exp(exp_num){
+        if(exp_num == -1){
+            return "N/A";
+        }
+        else{
+            return exp_num;
+        }
+    }
+
     toggle = () => {
         this.setState(previous => ({
             modal: !previous.modal
@@ -12,7 +22,7 @@ class SeeDetail extends Component{
 
     not_req = (val) => {
         if(val == 0 | val == "" | val == null){
-            return 'no-info'
+            return 'N/A'
         }
         else{
             return val
@@ -51,7 +61,7 @@ class SeeDetail extends Component{
                 return(
                     <span>
                         <p className="t-1">Stipend Amount:</p>&nbsp;&nbsp;
-                        <h5>no-info</h5>
+                        <h5>N/A</h5>
                     </span>
                 );
             }
@@ -112,15 +122,15 @@ class SeeDetail extends Component{
             <Col md={4}>
                 <span>
                     <p className="t-1">Number of Previous Internships:</p>&nbsp;&nbsp;
-                    <h5>{this.props.student.prev_exp_num}</h5>
+                    <h5>{this.prev_exp(this.props.student.prev_exp_num)}</h5>
                 </span>
             </Col>
-            <Col md={4}>
+            {/* <Col md={4}>
                 <span>
                     <p className="t-1">Number of Jobs Applied:</p>&nbsp;&nbsp;
                     <h5>{this.props.student.jobs_applied}</h5>
                 </span>
-            </Col>
+            </Col> */}
           </Row>
           <Row className="show-grid">
           <Col md={4}>
