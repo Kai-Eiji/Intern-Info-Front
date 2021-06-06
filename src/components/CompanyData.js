@@ -50,6 +50,18 @@ class CompanyData extends Component{
         }
     }
 
+    one_data = (xy) =>{
+      if(xy[0] == null){
+        return xy;
+      }
+      else if(xy[0] == xy[1]){
+        return [xy[0] - 0.05 , xy[1] + 0.05];
+      }
+      else{
+        return xy;
+      }
+    }
+
     searchData = () => {
         //e.preventDefault();
         this.setState({final_company_name : this.state.company});

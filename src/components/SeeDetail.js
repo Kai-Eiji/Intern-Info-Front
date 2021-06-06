@@ -29,8 +29,8 @@ class SeeDetail extends Component{
         }
     }
 
-    show_comment = (cm) =>{
-        if(cm == ""){
+    show_comment = (cm, pk) =>{
+        if(cm == "" || pk < 594){
             return <></>
         }
         else{
@@ -143,7 +143,7 @@ class SeeDetail extends Component{
                 {this.show_housing_amount()}
             </Col>
           </Row>
-          {this.show_comment(this.props.student.comment)}
+          {this.show_comment(this.props.student.comment, this.props.student.pk)}
         </Container>
     )
     

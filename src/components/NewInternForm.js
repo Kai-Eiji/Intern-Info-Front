@@ -82,7 +82,7 @@ class NewStudentForm extends React.Component {
 
           <Form.Group as={Col} md="3" className="ml-3" >
             <Form.Label>Salary</Form.Label>
-            <Form.Control onChange={this.onChangeNum}  type="number" step="0.1" name="salary" placeholder="Salary" required />
+            <Form.Control onChange={this.onChangeNum}  type="number" step="0.1" name="salary" placeholder="Salary Per Hour" required />
           </Form.Group>
         </Form.Row>
 
