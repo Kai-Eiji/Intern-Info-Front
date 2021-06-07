@@ -13,6 +13,7 @@ class MyNavBar extends Component{
                   <Nav.Link href="/">Home</Nav.Link>
                   <Nav.Link href="/search">Search</Nav.Link>
                   <Nav.Link href="/cpdata">Company</Nav.Link>
+                  <Nav.Link href="/ranking">Ranking</Nav.Link>
                 </Nav>
               </Navbar>
         );

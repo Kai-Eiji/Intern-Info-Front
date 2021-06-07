@@ -10,7 +10,7 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 class CompanyData extends Component{
 
     state = {
-        company : "N/A",
+        company : "",
         final_company_name : "N/A",
         total_ave : null,
         total_max : null,
@@ -36,6 +36,10 @@ class CompanyData extends Component{
         deleted : false,
     }
 
+    componentDidMount(){
+      this.searchData();
+    }
+
     onChange = e => {
             console.log("e.target.value =", e.target.value);
             this.setState({ [e.target.name]: e.target.value });
@@ -50,18 +54,6 @@ class CompanyData extends Component{
         }
     }
 
-    one_data = (xy) =>{
-      if(xy[0] == null){
-        return xy;
-      }
-      else if(xy[0] == xy[1]){
-        return [xy[0] - 0.05 , xy[1] + 0.05];
-      }
-      else{
-        return xy;
-      }
-    }
-
     searchData = () => {
         //e.preventDefault();
         this.setState({final_company_name : this.state.company});
@@ -73,13 +65,21 @@ class CompanyData extends Component{
                             jun_ave : this.round(res.data.junior.avg.salary__avg), jun_max : res.data.junior.max.salary__max, jun_min : res.data.junior.min.salary__min, jun_count : res.data.junior.count,
                             sen_ave : this.round(res.data.senior.avg.salary__avg), sen_max : res.data.senior.max.salary__max, sen_min : res.data.senior.min.salary__min, sen_count : res.data.senior.count,
                             locations : res.data.cities,
-            });
+            });  
         });
-
     };
 
     deleteCompanyData = () =>{
         this.setState({deleted : true});
+    }
+
+    title = (t) =>{
+      if(t === ""){
+        return "Salary Range of All Data";
+      }
+      else{
+        return "Salary Range of " + t;
+      }
     }
 
 
@@ -87,7 +87,7 @@ class CompanyData extends Component{
     		const options = {
     			animationEnabled: true,
     			title:{
-    				text: "Salary Range of " + this.state.final_company_name,
+    				text: this.title(this.state.final_company_name),
     				fontFamily: "helvetica"
     			},
     			axisY: {
@@ -99,11 +99,11 @@ class CompanyData extends Component{
     				type: "rangeBar",
     				indexLabel: "${y[#index]}",
     				dataPoints: [
-    					{ label: "Senior", y: [this.state.sen_min, this.state.sen_max] },
+    					{ label: "Senior", y: [this.state.sen_min, this.state.sen_max]},
     					{ label: "Junior", y: [this.state.jun_min, this.state.jun_max] },
     					{ label: "Sophomore", y: [this.state.sop_min, this.state.sop_max] },
     					{ label: "Freshmen", y: [this.state.fre_min, this.state.fre_max] },
-    					{ label: "Total", y: [this.state.total_min, this.state.total_max] }
+    					{ label: "All", y: [this.state.total_min, this.state.total_max] },
     				]
     			}]
     		}

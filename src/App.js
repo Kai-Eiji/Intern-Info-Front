@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import MyNavBar from "./components/MyNavBar";
 import SearchForm from "./components/SearchForm";
 import CompanyDataList from "./components/CompanyDataList";
+import Ranking from './components/Ranking';
 import {BrowserRouter as Router,Route, Redirect,Switch} from 'react-router-dom';
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
             <div>
               <MyNavBar />
               <Switch>
+                 <Route path="/ranking" component = {Ranking} />
                  <Route path="/cpdata" component = {CompanyDataList} />
                  <Route path="/search" component = {SearchForm} />
                  <Route path="/" component = {Home} />
