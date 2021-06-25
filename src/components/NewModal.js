@@ -16,7 +16,7 @@ class NewStudentModal extends Component {
   };
 
   button = (
-    <Button color="primary" className="float-right cm-1" onClick={this.toggle} style={{ minWidth: "200px" }}>Post Info</Button>
+    <Button color="primary" className="float-right cm-1" onClick={this.toggle} style={{maxHeight: "40px", maxWidth: "130px"}}>Post Info</Button>
   );
 
   render() {

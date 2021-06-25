@@ -15,11 +15,21 @@ class Home extends Component {
     prev: "",
     limit: 20,
     dataNum: 0,
+    width: window.innerWidth,
   };
+
+  handleResize = (e) => {
+    this.setState({ width: window.innerWidth });
+   };
 
   componentDidMount() {
     this.resetState();
+    window.addEventListener("resize", this.handleResize);
   }
+
+   componentWillUnmount() {
+    window.addEventListener("resize", this.handleResize);
+  } 
 
   getStudents = () => {
     axios.get(List_URL+"?limit="+this.state.limit).then(res => this.setState({ students: res.data.results, next: res.data.next, prev: res.data.previous, dataNum : res.data.count})).then();
@@ -51,11 +61,14 @@ class Home extends Component {
   };
 
   render() {
+    const width = this.state.width;
     return (
-
       <Container style={{ marginTop: "20px" }}>
-        <div className="text-center ">
-            <div style={{display: "inline-block", marginLeft: "-250px", marginRight: "100px"}}>
+        <div className="text-center " style={ width > 500 ?
+          {display: "flex", justifyContent: "space-between", flexWrap: "wrap" }
+          :
+          {display: "flex", flexDirection: "column", alignItems: "center"}}>
+            <div >
                 <Form onSubmit={this.changePageLimit}>
                   <Form.Group>
                     <Form.Label style={{marginBottom: "0rem"}}>Per Page Results</Form.Label>
@@ -67,7 +80,7 @@ class Home extends Component {
                   </Form.Group>
                 </Form>
             </div>
-            <h1 className="same-line">Salary List</h1>
+            <h1 className="">Salary List</h1>
             <NewModal resetState={this.resetState} />
         </div>
     

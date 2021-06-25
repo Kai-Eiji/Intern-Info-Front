@@ -23,7 +23,7 @@ class StudentList extends Component {
     const students = this.props.students;
     const width = this.state.width;
     return (
-      <Table striped bordered hover>
+      <Table className="mt-3" striped bordered hover>
         <thead>
           <tr>
             <th>Company</th>
@@ -36,10 +36,8 @@ class StudentList extends Component {
                 <th>Date Posted</th>
               </React.Fragment> 
               :
-              ""
+              null
             }
-            
-            <th></th>
           </tr>
         </thead>
         <tbody>
