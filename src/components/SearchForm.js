@@ -20,7 +20,6 @@ class SearchForm extends Component{
     }
 
     onChange = e => {
-        console.log("e.target.value =", e.target.value);
         this.setState({ [e.target.name]: e.target.value });
      };
 
@@ -33,31 +32,26 @@ class SearchForm extends Component{
       else{
         var integer = parseInt(e.target.value, 10);
       }
-      console.log("e.target.value =", e.target.value);
-      console.log("integer =", integer);
       this.setState({ [e.target.name]:  integer});
     };
 
     onChangeLimit = e => {
-       console.log("e.target.value =", e.target.value);
        this.setState({limit : e.target.value});
      };
 
      getNext = () => {
-           axios.get(this.state.next).then(res => this.setState({ students: res.data.results, next: res.data.next, prev: res.data.previous})).then(console.log(this.state));
+           axios.get(this.state.next).then(res => this.setState({ students: res.data.results, next: res.data.next, prev: res.data.previous}));
          };
 
     getPrev = () => {
-        axios.get(this.state.prev).then(res => this.setState({ students: res.data.results, next: res.data.next, prev: res.data.previous})).then(console.log(this.state));
+        axios.get(this.state.prev).then(res => this.setState({ students: res.data.results, next: res.data.next, prev: res.data.previous}));
       };
 
     searchData = () => {
         //e.preventDefault();
-        console.log(this.state);
         axios.get(Search_URL +"/?limit=" + this.state.limit + "&salary_min="+this.state.min_salary+"&salary_max="+this.state.max_salary+"&order_by=salary&company=" + this.state.company +"&city=" + this.state.city).
         then( res => {
             this.setState({ students: res.data.results, next: res.data.next, prev: res.data.previous, resultNum : res.data.count});
-            console.log(res.data);
         });
 
     };

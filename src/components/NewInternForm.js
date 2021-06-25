@@ -28,30 +28,25 @@ class NewStudentForm extends React.Component {
   }
 
   onChange = e => {
-    console.log("e.target.value =", e.target.value);
     this.setState({ [e.target.name]: e.target.value });
   };
 
   onChangeNum = e => {
     var integer = parseInt(e.target.value, 10);
-    console.log("e.target.value =", e.target.value);
     this.setState({ [e.target.name]:  integer});
   };
 
   onChangeFloat = e => {
     var float;
     float = parseFloat(e.target.value)
-    console.log("e.target.value =", e.target.value);
     this.setState({ [e.target.name]:  float});
   };
 
     createStudent = e => {
         e.preventDefault();
-        console.log(this.state);
         axios.post(List_URL, this.state).then((response) => {
           this.props.resetState();
           this.props.toggle();
-          console.log(response)
         });
     };
 

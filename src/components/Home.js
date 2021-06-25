@@ -22,15 +22,15 @@ class Home extends Component {
   }
 
   getStudents = () => {
-    axios.get(List_URL+"?limit="+this.state.limit).then(res => this.setState({ students: res.data.results, next: res.data.next, prev: res.data.previous, dataNum : res.data.count})).then(console.log(this.state));
+    axios.get(List_URL+"?limit="+this.state.limit).then(res => this.setState({ students: res.data.results, next: res.data.next, prev: res.data.previous, dataNum : res.data.count})).then();
   };
 
   getNext = () => {
-      axios.get(this.state.next).then(res => this.setState({ students: res.data.results, next: res.data.next, prev: res.data.previous})).then(console.log(this.state));
+      axios.get(this.state.next).then(res => this.setState({ students: res.data.results, next: res.data.next, prev: res.data.previous})).then();
     };
 
    getPrev = () => {
-       axios.get(this.state.prev).then(res => this.setState({ students: res.data.results, next: res.data.next, prev: res.data.previous})).then(console.log(this.state));
+       axios.get(this.state.prev).then(res => this.setState({ students: res.data.results, next: res.data.next, prev: res.data.previous})).then();
      };
 
    getLast = () => {
@@ -38,13 +38,12 @@ class Home extends Component {
        if(this.state.dataNum % this.state.limit === 0 ){
             offSet = offSet - this.state.limit;
        }
-       axios.get(List_URL+"?limit="+this.state.limit+"&offset="+offSet).then(res => this.setState({ students: res.data.results, next: res.data.next, prev: res.data.previous, dataNum : res.data.count})).then(console.log(this.state));
+       axios.get(List_URL+"?limit="+this.state.limit+"&offset="+offSet).then(res => this.setState({ students: res.data.results, next: res.data.next, prev: res.data.previous, dataNum : res.data.count}));
    }
 
    onChange = e => {
-       console.log("e.target.value =", e.target.value);
        this.setState({limit : e.target.value});
-       axios.get(List_URL+"?limit="+e.target.value).then(res => this.setState({ students: res.data.results, next: res.data.next, prev: res.data.previous})).then(console.log(this.state));
+       axios.get(List_URL+"?limit="+e.target.value).then(res => this.setState({ students: res.data.results, next: res.data.next, prev: res.data.previous}));
      };
 
   resetState = () => {

@@ -11,7 +11,6 @@ class CompanyDataList extends Component{
     addCompanyData = () => {
         let newList =  this.state.companyDataList.concat(<CompanyData />);
         this.setState({companyDataList : newList});
-        console.log(this.state.companyDataList)
     }
 
     render(){

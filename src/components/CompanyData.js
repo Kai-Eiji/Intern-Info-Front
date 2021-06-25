@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Col, Form, Button, Badge, Table} from 'react-bootstrap';
+import {Container, Col, Form, Button, Badge, Table} from 'react-bootstrap';
 import Card from 'react-bootstrap/Card'
 import axios from "axios";
 import { Company_Info_URL } from "../constants";
@@ -51,7 +51,6 @@ class CompanyData extends Component{
     } 
 
     onChange = e => {
-            console.log("e.target.value =", e.target.value);
             this.setState({ [e.target.name]: e.target.value });
     };
 
@@ -124,10 +123,8 @@ class CompanyData extends Component{
     		    return(<p></p>);
 
     		}
-    		return (
-
-    		<Card border="dark" className={width > 600 ? "m-5" : ""} >
-          <p>{width}</p>
+    		return (  
+    		<Card border="dark" className={width > 500 ? "m-5" : ""} >
                 <Card.Body>
                     <div>
                         		<Button variant="danger" style={{ float: "right", marginTop: "5px"}} onClick={this.deleteCompanyData}>X</Button>

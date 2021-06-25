@@ -14,13 +14,23 @@ class Ranking extends Component{
         final_city: "",
         data: [],
         ranges: [],
-    }
-    componentDidMount(){
-        this.searchData();
+        width: window.innerWidth,
     }
 
+    handleResize = (e) => {
+        this.setState({ width: window.innerWidth });
+       };
+
+    componentDidMount(){
+        this.searchData();
+        window.addEventListener("resize", this.handleResize);
+    }
+
+    componentWillUnmount() {
+        window.addEventListener("resize", this.handleResize);
+      } 
+
     onChange = e => {
-            console.log("e.target.value =", e.target.value);
             this.setState({ [e.target.name]: e.target.value });
     };
 
@@ -42,8 +52,7 @@ class Ranking extends Component{
                 data: res.data.agg,
                 ranges: res.data.ranges
             });
-        }).then(console.log(this.state.data))
-
+        })
     };
 
     getCity(t){
@@ -60,6 +69,7 @@ class Ranking extends Component{
     }
 
     render() {
+            const width = this.state.width;
     		const options = {
                 animationEnabled: true,
                 theme: "light1", // "light1", "light2", "dark1", "dark2"
@@ -105,26 +115,26 @@ class Ranking extends Component{
     		}
     		return (
 
-    		<Card border="dark" className="m-5">
+    		<Card border="dark" className={width > 500 ? "m-5" : ""}>
                 <Card.Body>
 
                     <div>
-                        		<Button variant="danger" style={{ float: "right"}} onClick={this.deleteCompanyData}>X</Button>
-                        		<div className="center_comp mb-5">
-                        		    <Form>
-                                      <Form.Row className="align-items-center">
-                                        <Col sm={8} className="my-1">
-                                          <Form.Control onChange={this.onChange}  type="text" name="city" placeholder="Enter Company Name" />
-                                        </Col>
-                                        <Col xs="auto" className="my-1">
-                                            <Button onClick={this.searchData}>Search</Button>
-                                        </Col>
-                                      </Form.Row>
-                                    </Form>
-                        		</div>
-                        		<CanvasJSChart options = {options}/>
-                                <p></p>
-                                <CanvasJSChart options = {pie_options} />
+                        <Button variant="danger" style={{ float: "right", marginTop: "5px"}} onClick={this.deleteCompanyData}>X</Button>
+                        <div className="center_comp mb-5">
+                            <Form>
+                                <Form.Row className="align-items-center">
+                                <Col sm={8} className="my-1">
+                                    <Form.Control onChange={this.onChange}  type="text" name="city" placeholder="Enter City Name" />
+                                </Col>
+                                <Col xs="auto" className="my-1">
+                                    <Button onClick={this.searchData}>Search</Button>
+                                </Col>
+                                </Form.Row>
+                            </Form>
+                        </div>
+                        <CanvasJSChart options = {options}/>
+                        <p></p>
+                        <CanvasJSChart options = {pie_options} />
                     </div>
 
                 </Card.Body>

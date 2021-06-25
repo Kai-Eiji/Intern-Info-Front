@@ -26,7 +26,7 @@ class StudentList extends Component {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Company {width}</th>
+            <th>Company</th>
             <th>Salary</th>
             <th>City</th>
             {
@@ -52,7 +52,18 @@ class StudentList extends Component {
           ) : (
             students.map(student => (
               <tr key={student.pk}>
-                <td>{student.company}</td>
+                <td style={{textAlign: "cenetr"}}>
+                  {student.company}
+                  {
+                    width < 500 ?
+                    <SeeDetail
+                      style={{fontSize: "12px"}}
+                      student={student}
+                      resetState={this.props.resetState}
+                    />
+                    : ""
+                  }
+                </td>
                 <td>${student.salary}</td>
                 <td>{student.city}</td>
                 {
@@ -60,16 +71,16 @@ class StudentList extends Component {
                   <React.Fragment>
                     <td>{student.grade_year}</td>
                     <td>{student.post_date}</td>
+                    <td align="center">
+                      <SeeDetail
+                        student={student}
+                        resetState={this.props.resetState}
+                      />
+                    </td>
                   </React.Fragment>
                   :
                   ""
                 }
-                <td align="center">
-                  <SeeDetail
-                    student={student}
-                    resetState={this.props.resetState}
-                  />
-                </td>
               </tr>
             ))
           )}
