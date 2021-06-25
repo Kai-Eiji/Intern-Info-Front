@@ -29,8 +29,16 @@ class StudentList extends Component {
             <th>Company {width}</th>
             <th>Salary</th>
             <th>City</th>
-            <th>Year</th>
-            <th>Date Posted</th>
+            {
+              width > 500 ?
+              <React.Fragment>
+                <th>Year</th>
+                <th>Date Posted</th>
+              </React.Fragment> 
+              :
+              ""
+            }
+            
             <th></th>
           </tr>
         </thead>
@@ -47,8 +55,15 @@ class StudentList extends Component {
                 <td>{student.company}</td>
                 <td>${student.salary}</td>
                 <td>{student.city}</td>
-                <td>{student.grade_year}</td>
-                <td>{student.post_date}</td>
+                {
+                  width > 500 ?
+                  <React.Fragment>
+                    <td>{student.grade_year}</td>
+                    <td>{student.post_date}</td>
+                  </React.Fragment>
+                  :
+                  ""
+                }
                 <td align="center">
                   <SeeDetail
                     student={student}
