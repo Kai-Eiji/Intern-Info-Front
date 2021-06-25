@@ -72,14 +72,11 @@ class Home extends Component {
             <NewModal resetState={this.resetState} />
         </div>
     
-        <Row>
-          <Col>
-            <InternList
-              students={this.state.students}
-              resetState={this.resetState}
-            />
-          </Col>
-        </Row>
+       
+        <InternList
+          students={this.state.students}
+          resetState={this.resetState}
+        />
 
         <div className="center">
             <Pagination>

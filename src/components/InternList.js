@@ -2,15 +2,31 @@ import React, { Component } from "react";
 import { Table } from "reactstrap";
 import SeeDetail from "./SeeDetail";
 
-
 class StudentList extends Component {
+  state = {
+    width: window.innerWidth,
+  }
+
+  handleResize = (e) => {
+    this.setState({ width: window.innerWidth });
+   };
+
+  componentDidMount() {
+  window.addEventListener("resize", this.handleResize);
+  }
+
+  componentWillUnmount() {
+  window.addEventListener("resize", this.handleResize);
+  } 
+
   render() {
     const students = this.props.students;
+    const width = this.state.width;
     return (
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Company</th>
+            <th>Company {width}</th>
             <th>Salary</th>
             <th>City</th>
             <th>Year</th>
