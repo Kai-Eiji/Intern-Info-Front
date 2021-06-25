@@ -34,11 +34,21 @@ class CompanyData extends Component{
         sen_count : null,
         locations : [],
         deleted : false,
+        width: window.innerWidth,
     }
+
+    handleResize = (e) => {
+      this.setState({ width: window.innerWidth });
+     };
 
     componentDidMount(){
       this.searchData();
+      window.addEventListener("resize", this.handleResize);
     }
+
+    componentWillUnmount() {
+      window.addEventListener("resize", this.handleResize);
+    } 
 
     onChange = e => {
             console.log("e.target.value =", e.target.value);
@@ -84,6 +94,8 @@ class CompanyData extends Component{
 
 
     render() {
+
+        const width = this.state.width;
     		const options = {
     			animationEnabled: true,
     			title:{
@@ -114,9 +126,9 @@ class CompanyData extends Component{
     		}
     		return (
 
-    		<Card border="dark" className="m-5">
+    		<Card border="dark" className={width > 600 ? "m-5" : ""} >
+          <p>{width}</p>
                 <Card.Body>
-
                     <div>
                         		<Button variant="danger" style={{ float: "right", marginTop: "5px"}} onClick={this.deleteCompanyData}>X</Button>
                         		<div className="center_comp mb-5">

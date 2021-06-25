@@ -12,11 +12,11 @@ class StudentList extends Component {
    };
 
   componentDidMount() {
-  window.addEventListener("resize", this.handleResize);
+    window.addEventListener("resize", this.handleResize);
   }
 
   componentWillUnmount() {
-  window.addEventListener("resize", this.handleResize);
+    window.addEventListener("resize", this.handleResize);
   } 
 
   render() {
