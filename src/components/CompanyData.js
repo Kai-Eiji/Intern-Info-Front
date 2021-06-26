@@ -127,7 +127,7 @@ class CompanyData extends Component{
     		<Card border="dark" className={width > 500 ? "m-5" : ""} >
                 <Card.Body>
                     <div>
-                        		<Button variant="danger" style={{ float: "right", marginTop: "5px"}} onClick={this.deleteCompanyData}>X</Button>
+                        		<Button variant="danger" style={{ float: "right", marginTop: "5px", marginLeft: "5px"}} onClick={this.deleteCompanyData}>X</Button>
                         		<div className="center_comp mb-5">
                         		    <Form>
                                       <Form.Row className="align-items-center">
@@ -229,7 +229,7 @@ class CompanyData extends Component{
                                             <Card.Text>
                                               {
                                                   this.state.locations.map( city => {
-                                                      return <h5 className="horizontal" style={{wordWrap: "break-word"}}>
+                                                      return <h5 className="horizontal" style={{wordWrap: "break-word", fontSize: "14px"}}>
                                                                   <Badge variant="Light">
                                                                       {city},
                                                                   </Badge>

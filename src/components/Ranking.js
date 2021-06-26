@@ -119,7 +119,7 @@ class Ranking extends Component{
                 <Card.Body>
 
                     <div>
-                        <Button variant="danger" style={{ float: "right", marginTop: "5px"}} onClick={this.deleteCompanyData}>X</Button>
+                        <Button variant="danger" style={{ float: "right", marginTop: "5px", marginLeft: "5px"}} onClick={this.deleteCompanyData}>X</Button>
                         <div className="center_comp mb-5">
                             <Form>
                                 <Form.Row className="align-items-center">
