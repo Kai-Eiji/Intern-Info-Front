@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {Col, Form, Button, Badge, Table} from 'react-bootstrap';
 import Card from 'react-bootstrap/Card'
 import axios from "axios";
-import { Ranking_URL } from "../constants";
+import { Ranking_URL, ALL_City_URL } from "../constants";
 import CanvasJSReact from './canvasjs.react';
+import { Typeahead } from 'react-bootstrap-typeahead';
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -14,6 +15,7 @@ class Ranking extends Component{
         final_city: "",
         data: [],
         ranges: [],
+        all_city: [],
         width: window.innerWidth,
     }
 
@@ -24,6 +26,13 @@ class Ranking extends Component{
     componentDidMount(){
         this.searchData();
         window.addEventListener("resize", this.handleResize);
+
+        axios.get(ALL_City_URL)
+        .then(res => {
+            this.setState({all_city: res.data.all_cities}); 
+            //console.log('city', res.data.all_cities)
+        })
+        
     }
 
     componentWillUnmount() {
@@ -124,7 +133,13 @@ class Ranking extends Component{
                             <Form>
                                 <Form.Row className="align-items-center">
                                 <Col sm={8} className="my-1">
-                                    <Form.Control onChange={this.onChange}  type="text" name="city" placeholder="Enter City Name" />
+                                    <Typeahead
+                                        onChange={(selected) => {
+                                            this.setState({city: selected[0]})
+                                        }}
+                                        options={this.state.all_city}
+                                        id="basic-typeahead-single"
+                                    />
                                 </Col>
                                 <Col xs="auto" className="my-1">
                                     <Button onClick={this.searchData}>Search</Button>

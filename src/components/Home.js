@@ -13,7 +13,7 @@ class Home extends Component {
     students: [],
     next: "",
     prev: "",
-    limit: 20,
+    limit: 600,
     dataNum: 0,
     width: window.innerWidth,
   };

@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import {Container, Col, Form, Button, Badge, Table} from 'react-bootstrap';
 import Card from 'react-bootstrap/Card'
 import axios from "axios";
-import { Company_Info_URL } from "../constants";
+import { Company_Info_URL, ALL_Company_URL } from "../constants";
 import CanvasJSReact from './canvasjs.react';
+import { Typeahead } from 'react-bootstrap-typeahead';
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+
 
 class CompanyData extends Component{
 
@@ -35,6 +37,7 @@ class CompanyData extends Component{
         locations : [],
         deleted : false,
         width: window.innerWidth,
+        all_company: []
     }
 
     handleResize = (e) => {
@@ -44,6 +47,11 @@ class CompanyData extends Component{
     componentDidMount(){
       this.searchData();
       window.addEventListener("resize", this.handleResize);
+
+      axios.get(ALL_Company_URL)
+        .then(res => {
+            this.setState({all_company: res.data.all_companies}); 
+        })
     }
 
     componentWillUnmount() {
@@ -132,7 +140,13 @@ class CompanyData extends Component{
                         		    <Form>
                                       <Form.Row className="align-items-center">
                                         <Col sm={8} className="my-1">
-                                          <Form.Control onChange={this.onChange}  type="text" name="company" placeholder="Enter Company Name" />
+                                        <Typeahead
+                                            onChange={(selected) => {
+                                                this.setState({company: selected[0]})
+                                            }}
+                                            options={this.state.all_company}
+                                            id="basic-typeahead-single"
+                                        />
                                         </Col>
                                         <Col xs="auto" className="my-1">
                                             <Button onClick={this.searchData}>Search</Button>
