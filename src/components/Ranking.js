@@ -59,10 +59,21 @@ class Ranking extends Component{
         then( res => {
             this.setState({ 
                 data: res.data.agg,
-                ranges: res.data.ranges
+                ranges: this.cleanRanges(res.data.ranges)
             });
         })
     };
+
+    cleanRanges(ranges){
+        let new_ranges = []
+        let i = 0;
+        for(i; i < ranges.length; i++){
+            if(ranges[i] != null){
+                new_ranges.push(ranges[i]);
+            }
+        }
+        return new_ranges;
+    }
 
     getCity(t){
         if(t === ""){
