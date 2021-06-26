@@ -146,6 +146,7 @@ class CompanyData extends Component{
                                             }}
                                             options={this.state.all_company}
                                             id="basic-typeahead-single"
+                                            placeholder="Comapny Name"
                                         />
                                         </Col>
                                         <Col xs="auto" className="my-1">

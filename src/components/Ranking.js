@@ -30,7 +30,6 @@ class Ranking extends Component{
         axios.get(ALL_City_URL)
         .then(res => {
             this.setState({all_city: res.data.all_cities}); 
-            //console.log('city', res.data.all_cities)
         })
         
     }
@@ -150,6 +149,7 @@ class Ranking extends Component{
                                         }}
                                         options={this.state.all_city}
                                         id="basic-typeahead-single"
+                                        placeholder="City Name"
                                     />
                                 </Col>
                                 <Col xs="auto" className="my-1">

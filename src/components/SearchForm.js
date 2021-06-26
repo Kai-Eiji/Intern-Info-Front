@@ -3,7 +3,8 @@ import {Col, Form, Button} from 'react-bootstrap';
 import Pagination from 'react-bootstrap/Pagination'
 import axios from "axios";
 import StudentList from "./InternList";
-import { Search_URL } from "../constants";
+import { Search_URL, ALL_City_URL, ALL_Company_URL } from "../constants";
+import { Typeahead } from 'react-bootstrap-typeahead';
 
 class SearchForm extends Component{
 
@@ -16,10 +17,25 @@ class SearchForm extends Component{
         next: "",
         prev: "",
         limit: 20,
-        resultNum: 0
+        resultNum: 0,
+        all_city: [""],
+        all_company: []
+    }
+
+    componentDidMount(){
+        axios.get(ALL_City_URL)
+          .then(res => {
+              this.setState({all_city: res.data.all_cities.concat([""])}); 
+          })
+
+        axios.get(ALL_Company_URL)
+        .then(res => {
+            this.setState({all_company: res.data.all_companies}); 
+        })
     }
 
     onChange = e => {
+        console.log('e', e.target.value);
         this.setState({ [e.target.name]: e.target.value });
      };
 
@@ -49,7 +65,10 @@ class SearchForm extends Component{
 
     searchData = () => {
         //e.preventDefault();
-        axios.get(Search_URL +"/?limit=" + this.state.limit + "&salary_min="+this.state.min_salary+"&salary_max="+this.state.max_salary+"&order_by=salary&company=" + this.state.company +"&city=" + this.state.city).
+        let city = this.state.city == undefined ? "" : this.state.city;
+        let company = this.state.company == undefined ? "" : this.state.company;
+  
+        axios.get(Search_URL +"/?limit=" + this.state.limit + "&salary_min="+this.state.min_salary+"&salary_max="+this.state.max_salary+"&order_by=salary&company=" + company +"&city=" + city).
         then( res => {
             this.setState({ students: res.data.results, next: res.data.next, prev: res.data.previous, resultNum : res.data.count});
         });
@@ -65,12 +84,26 @@ class SearchForm extends Component{
                  <Form.Row >
                      <Form.Group as={Col} md="3" >
                         <Form.Label>Company</Form.Label>
-                        <Form.Control onChange={this.onChange}  type="text" name="company" placeholder="Any company if blank" />
+                        <Typeahead
+                            onChange={(selected) => {
+                                this.setState({company: selected[0]})
+                            }}
+                            options={this.state.all_company}
+                            id="basic-typeahead-single"
+                            placeholder="Any company if blank"
+                        />
                     </Form.Group>
 
                     <Form.Group as={Col} md="3" >
                         <Form.Label>City</Form.Label>
-                        <Form.Control onChange={this.onChange}  type="text" name="city" placeholder="Any city if blank"/>
+                        <Typeahead
+                            onChange={(selected) => {
+                                this.setState({city: selected[0]})
+                            }}
+                            options={this.state.all_city}
+                            id="basic-typeahead-single"
+                            placeholder="Any city if blank"
+                        />
                     </Form.Group>
                  </Form.Row>
 
