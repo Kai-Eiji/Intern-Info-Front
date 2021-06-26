@@ -112,8 +112,8 @@ class Ranking extends Component{
                     toolTipContent: "<b>{label}</b>: {y}%",
                     showInLegend: "true",
                     legendText: "{label}",
-                    indexLabelFontSize: 16,
-                    indexLabel: "{label} - {y}%",
+                    indexLabelFontSize: 13,
+                    indexLabel: "",
                     dataPoints: this.state.ranges
                 }]
             }
