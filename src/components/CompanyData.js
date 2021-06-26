@@ -150,44 +150,73 @@ class CompanyData extends Component{
                                               <th>Average</th>
                                               <th>Max</th>
                                               <th>Min</th>
-                                              <th>Number of Data</th>
+                                              {
+                                                width > 500 ?
+                                                  <th>Number of Data</th>
+                                                : null
+                                              }
                                             </tr>
                                           </thead>
-                                          <tbody>
+                                          <tbody style={width < 500 ? {fontSize: "12px"} : {}}>
                                             <tr>
                                               <td>Total</td>
                                               <td>$ {this.state.total_ave}</td>
                                               <td>$ {this.state.total_max}</td>
                                               <td>$ {this.state.total_min}</td>
-                                              <td>{this.state.total_count}  (Year N/A: {this.state.total_count - this.state.fre_count - this.state.sop_count - this.state.jun_count - this.state.sen_count}) </td>
+                                              {
+                                                width > 500 ?
+                                                 <td>{this.state.total_count}  (Year N/A: {this.state.total_count - this.state.fre_count - this.state.sop_count - this.state.jun_count - this.state.sen_count}) </td>
+                                                :
+                                                  null
+                                              }
                                             </tr>
                                             <tr>
                                               <td>Freshmen</td>
                                               <td>$ {this.state.fre_ave}</td>
                                               <td>$ {this.state.fre_max}</td>
                                               <td>$ {this.state.fre_min}</td>
-                                              <td>{this.state.fre_count}</td>
+                                              {
+                                                width > 500 ?
+                                                  <td>{this.state.fre_count}</td>
+                                                :
+                                                  null
+                                              }
                                             </tr>
                                             <tr>
                                               <td>Sophomore</td>
                                               <td>$ {this.state.sop_ave}</td>
                                               <td>$ {this.state.sop_max}</td>
                                               <td>$ {this.state.sop_min}</td>
-                                              <td>{this.state.sop_count}</td>
+                                              {
+                                                width > 500 ?
+                                                  <td>{this.state.sop_count}</td>
+                                                :
+                                                  null
+                                              }
                                             </tr>
                                             <tr>
                                               <td>Junior</td>
                                               <td>$ {this.state.jun_ave}</td>
                                               <td>$ {this.state.jun_max}</td>
                                               <td>$ {this.state.jun_min}</td>
-                                              <td>{this.state.jun_count}</td>
+                                              {
+                                                width > 500 ?
+                                                  <td>{this.state.jun_count}</td>
+                                                :
+                                                  null
+                                              }
                                             </tr>
                                             <tr>
                                               <td>Senior</td>
                                               <td>$ {this.state.sen_ave}</td>
                                               <td>$ {this.state.sen_max}</td>
                                               <td>$ {this.state.sen_min}</td>
-                                              <td>{this.state.sen_count}</td>
+                                              {
+                                                width > 500 ?
+                                                  <td>{this.state.sen_count}</td>
+                                                :
+                                                  null
+                                              }
                                             </tr>
                                           </tbody>
                                         </Table>
