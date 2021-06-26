@@ -143,7 +143,7 @@ class CompanyData extends Component{
                         			<CanvasJSChart options = {options}/>
 
                         			<div className="center_comp mt-5 mb-3" >
-                        			    <Table style={{ width: '70%' }} striped bordered hover>
+                        			    <Table style={width > 500 ? { width: '70%' } : {}} striped bordered hover>
                                           <thead>
                                             <tr>
                                               <th>Year</th>
@@ -223,13 +223,18 @@ class CompanyData extends Component{
                         			</div>
 
                         			<div className="center_comp mb-3">
-                        			    <Card style={{ width: '70%' }}>
+                        			    <Card style={width > 500 ? { width: '70%' } : {}}>
                         			      <Card.Header><h3 className="text-center">Office Locations</h3></Card.Header>
                                           <Card.Body>
                                             <Card.Text>
                                               {
                                                   this.state.locations.map( city => {
-                                                      return <h5 className="horizontal"><Badge variant="Light">{city}</Badge></h5>
+                                                      return <h5 className="horizontal" style={{wordWrap: "break-word"}}>
+                                                                  <Badge variant="Light">
+                                                                      {city},
+                                                                  </Badge>
+                                                              </h5>
+                                                                
                                               })}
                                             </Card.Text>
                                           </Card.Body>
